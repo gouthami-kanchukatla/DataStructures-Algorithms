@@ -1,0 +1,10 @@
+class Solution:
+    def toLowerCase(self, str: str) -> str:
+        result_str =""
+        for each in str:
+            if(ord(each) <=90 and ord(each)>=65):        
+                result_str = result_str+ chr(ord(each)+32)
+            else:
+                result_str =  result_str+each
+        return  result_str
+        
