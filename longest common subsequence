@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+        
+        int str1Len = text1.size();
+        int str2Len  = text2.size();
+        int c[str1Len+1][str2Len+1];
+        
+        for(int  i=0; i < str2Len+1; i++)
+        {
+            c[0][i] = 0;
+        }
+        for(int  i=0; i < str1Len+1; i++)
+        {
+            c[i][0] = 0;
+        }
+        
+    
+        for(int i  =0 ;  i < str1Len;i++)
+        {
+            for(int j  =0 ; j< str2Len;j++)
+            {
+                if(text1[i]  ==  text2[j])
+                {
+                    c[i+1][j+1] = 1+c[i][j];
+                     
+                }
+                else
+                {
+                    c[i+1][j+1] = max(c[i+1][j],c[i][j+1]);
+                }
+            }
+        }
+        cout << "The longest common subsequence is" << c[str1Len][str2Len] ;
+        return c[str1Len][str2Len];
+    }
+    
+};
