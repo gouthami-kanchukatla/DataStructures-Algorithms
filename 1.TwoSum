@@ -1,0 +1,37 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        
+        n = defaultdict(int)
+        # sortedNums  = nums.sort()
+        findElement  =  0
+        isEqual = False
+        
+        for ele in  nums:
+            n[ele]  = 0
+            
+        for ele in  nums:
+            n[ele] += 1
+        
+        for ele in nums:
+            # print("ele"  + str( ele)  + "target"  + str(abs(target-ele)))
+            if(  ele == target - ele and n[ele] > 1 ):
+                findElement  =  ele
+                isEqual  =  True
+                break;
+                 
+                                    
+            elif ele != target-ele and n[ele] >=1 and n[ target-ele] >=1 :
+                    # print("not equal")
+                    return [nums.index(ele),nums.index( target-ele)]
+                            
+        if(isEqual):
+            # print("equal"   +  str(findElement))
+            indices = []
+            for i in range(len(nums)):
+               if nums[i] == findElement:
+                  indices.append(i)
+            # print("indices" + str(indices))
+            return [indices[0],indices[1]]
+
+        
