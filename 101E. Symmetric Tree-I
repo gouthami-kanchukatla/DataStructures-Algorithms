@@ -1,0 +1,62 @@
+#Iterative
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        
+        if(not root):
+            return True
+        queue =[]
+        queue.append(root.left)
+        queue.append(root.right)
+        
+        while(queue):
+            
+            leftChild = queue.pop(0)
+            rightChild = queue.pop(0)
+            
+            if not  leftChild  and rightChild  :
+                print("False-1")
+                return False
+            
+            if leftChild  and not rightChild  :
+                print("False-2")
+
+                return False
+            
+            if not leftChild  and not rightChild :
+                continue
+                
+             
+            if  leftChild.val != rightChild.val:
+                
+                print("False-3" + str(leftChild.val)  + 
+                      str(rightChild.val))
+
+                return False
+            
+            queue.append(leftChild.left)
+            queue.append(rightChild.right)
+            queue.append(leftChild.right)
+            queue.append(rightChild.left)
+            
+            print(queue)
+            
+        
+        return True
+
+
+            
+            
+                
+
+        
+        
+
+        
+        
+        
