@@ -1,0 +1,31 @@
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        if len(nums) ==  1 :
+        return nums[0]
+    elif not nums:
+        return 0
+    else :
+        mid = len(nums)/2
+        print(mid)
+        l_sum = self.maxSubArray(nums[:mid])
+        r_sum = self.maxSubArray(nums[mid:])
+        c_sum = self.maxcrossingSubArray(nums,mid)
+        print(l_sum,r_sum,c_sum)
+        return max(l_sum,r_sum,c_sum)
+    
+    
+    def maxcrossingSubArray(self,nums,mid):
+        max_l_sum = max_r_sum = float('-inf')
+        sum = 0
+        for i in range(mid-1,-1,-1):
+            sum += nums[i]
+            max_l_sum = max( max_l_sum ,sum)
+        sum = 0
+
+        for i in range(mid,len(nums),1):
+            sum += nums[i]
+            max_r_sum = max( max_r_sum ,sum)
+        return max_l_sum + max_r_sum
+    
+    
+    
