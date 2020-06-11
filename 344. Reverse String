@@ -1,0 +1,22 @@
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instea
+        d.
+        """
+        i = 0
+        j = len(s)-1
+        while(  i < j):
+            
+            diff  = ord(s[i]) - ord(s[j])
+            s[i] = chr(ord(s[i])  - diff)
+            s[j] = chr(ord(s[j])  + diff)
+            i= i+1
+            j = j-1
+
+            
+            
+        # print("The ASCII value of char " + ch + " is: ",ord(list[i]))
+        
+
+        
