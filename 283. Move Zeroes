@@ -9,7 +9,7 @@ class Solution:
         k=0
         length  = len(nums)
         
-        while(i < length   and k < length):
+        while(k < length):
              
             if(nums[i] == 0):
                 self.rotate(i,length,nums)
