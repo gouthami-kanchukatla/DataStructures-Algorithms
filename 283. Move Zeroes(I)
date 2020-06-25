@@ -1,0 +1,39 @@
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if(not nums):
+          return None
+        i = 0
+        # k=0
+        length  = len(nums)
+        firstZeroIndex =  -1
+        temp = -1
+        
+        while( i < length):
+             
+            if(nums[i] != 0 and firstZeroIndex!=-1):
+                # self.swap(i,length,nums)
+                temp = nums[i]
+                nums[i] = nums[firstZeroIndex]
+                nums[firstZeroIndex] = temp
+                # k = firstIndex+1
+                firstZeroIndex += 1                               
+            elif(nums[i] == 0 and firstZeroIndex == -1 ):                
+                firstZeroIndex = i
+                
+            
+            i+=1
+            # k+=1
+            
+#     def rotate(self,begin:int,length:int, nums: List[int]):
+        
+#         index = begin
+#         end = length-begin-1
+        
+#         for  i in range( 0,end,1):
+#             nums[index]  = nums[index+1]
+#             index+=1
+#         nums[length-1] = 0
+        
