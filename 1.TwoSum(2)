@@ -1,0 +1,14 @@
+from collections import defaultdict
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        if(not nums):
+            return []
+        hashMap = defaultdict(lambda: 0)
+        
+        for i in range(0,len(nums),1):
+            hashMap[nums[i]] = i
+        for i in range(0,len(nums),1):
+            pairEle  = target-nums[i] 
+            if(  pairEle in hashMap and  hashMap.get(pairEle) is  not i ):
+                    return  [ i, hashMap.get(pairEle)]
