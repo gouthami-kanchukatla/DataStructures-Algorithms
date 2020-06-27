@@ -1,0 +1,17 @@
+class Solution:
+    def backspaceCompare(self, S: str, T: str) -> bool:
+        
+        res1 = self.backSpace(S)
+        res2 = self.backSpace(T)
+        return res2 ==  res1
+        
+    def  backSpace(self, S: str) -> str:
+        res = []
+        for ele in S:
+            if(ele is '#'):
+                if(res):
+                    res.pop()
+            else:
+                res +=  ele
+        return str(res)
+        
