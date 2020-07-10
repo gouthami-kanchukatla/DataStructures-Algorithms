@@ -1,0 +1,24 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        
+        if(n  is  1):
+            return True
+        if(n is  0):
+            return  False
+        if(n  < 0):
+            n = abs(n)      
+        setList = set()
+        curSum = 0
+        
+        while  n is not 1:
+            while n is not 0:
+                lastNum  = n%10
+                curSum  = int(curSum +  math.pow(int(lastNum),2))
+                n  = int(n/10)
+            if( curSum is 1):
+                return True
+            if( curSum in setList):
+                return False
+            setList.add(curSum)
+            n  = curSum
+            curSum =  0
