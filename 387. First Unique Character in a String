@@ -1,0 +1,13 @@
+lass Solution:
+    def firstUniqChar(self, s: str) -> int:
+        
+        if(not s):
+            return -1
+        
+        countDict = defaultdict(int)
+        for ele in s:
+            countDict[ele] = countDict[ele]+1
+        for ele in countDict:
+            if countDict[ele] is 1:
+                return s.index(ele)
+        return -1   
