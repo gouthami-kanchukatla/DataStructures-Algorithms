@@ -1,0 +1,31 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        
+        if(not nums):
+            return -1
+        
+        i = 0
+        max_num = float('-inf')
+        prev_max = float('inf')
+        
+        tempHash  = defaultdict(int)
+        
+        for ele in nums:
+            tempHash[ele] = tempHash[ele]+1
+        
+        while(i < k):
+            
+            for j in range(0, len(nums),1):
+                
+                if( nums[j] > max_num and nums[j] <= prev_max):                   
+                    if(nums[j] == prev_max and tempHash[prev_max] > 0):
+                        max_num = nums[j]
+                        break
+                    elif(nums[j] != prev_max):
+                        max_num = nums[j]
+            i = i+1
+            prev_max = max_num
+            tempHash[prev_max] = tempHash[prev_max] -1
+            max_num = float('-inf')
+           
+        return prev_max          215. Kth Largest Element in an Array
