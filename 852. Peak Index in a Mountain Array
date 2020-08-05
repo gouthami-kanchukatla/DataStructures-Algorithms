@@ -1,0 +1,25 @@
+class Solution:
+    def peakIndexInMountainArray(self, A: List[int]) -> int:
+        
+        if(not A):
+            return  -1
+        
+        
+        low = 0
+        high = len(A)-1
+        return self.findPeakIndex(A,low,high)
+      
+    def findPeakIndex(self, A: List[int], low, high) -> int:
+        
+        mid =  int((low+high)/2)
+        
+        if(mid <  0 or mid == len(A) -1):
+            return -1
+        
+        if( A[mid-1] < A[mid] and A[mid] > A[mid+1]):
+            return mid
+        elif(  A[mid-1] > A[mid] and A[mid]  > A[mid+1]):
+            return self.findPeakIndex(A,low,mid-1)
+        else:
+            return self.findPeakIndex(A,mid+1,high)
+        
