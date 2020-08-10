@@ -1,0 +1,49 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+import copy 
+class Solution:
+    
+    visitedNodes  =  {}
+    
+    def getClonedNode(self, node: 'Node' =  None ):
+        
+        if(not node):
+            return None
+        
+        if(node in self.visitedNodes) :
+            return self.visitedNodes[node]
+        else:
+            newNode =  Node(node.val, None,None)
+            self.visitedNodes[node] =  newNode
+            return self.visitedNodes[node]
+        
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        
+        # result  = copy.deepcopy(head)
+        # return result
+        
+        if(not  head):
+            return None
+        
+        oldNode  = head
+        newNode =  Node(oldNode.val, None,None)
+        newHead = newNode
+        self.visitedNodes[oldNode] =  newNode
+        
+        
+        while oldNode:
+                
+            newNode.next = self.getClonedNode(oldNode.next)
+            newNode.random = self.getClonedNode(oldNode.random)
+
+            oldNode  = oldNode.next
+            newNode =  newNode.next
+
+        return  newHead 
+            
