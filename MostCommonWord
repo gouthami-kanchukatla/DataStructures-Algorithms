@@ -1,0 +1,30 @@
+import re
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        my_string = "Bob        hit       a       ball"
+        # string.split() without  any argument splits on whitespace.
+        test = my_string.split()
+        print(test)
+        
+        # for i in "!?'.,;":
+        # paragraph=paragraph.replace(i," ")
+        resultList  =  re.split("[ !?',;.]",  paragraph)
+        # resultList = re.findall(r'(\w+)', paragraph) 
+
+        
+        
+        hashMap = defaultdict(int)
+        mostCommon =  0
+        resultString  = ""
+        for ele in resultList:
+            ele =  ele.lower()
+
+            if(ele and ele not in banned ):
+                hashMap[ele] =  hashMap[ele]+1
+             
+        for  ele in  hashMap:
+            if( hashMap[ele]  >  mostCommon):
+                mostCommon  = hashMap[ele] 
+                resultString = ele
+        
+        return resultString
