@@ -1,0 +1,24 @@
+class Solution:
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        letList = []
+        digList = []
+        
+        for ele in logs:            
+            splitEle = ele.split()
+            if(splitEle[1].isalpha() ):
+                letList.append(ele.split())
+            elif(splitEle[1].isdigit()):
+                    digList.append(ele)
+        #key  is the  keyword            
+        letList.sort(key  =  lambda x: x[0])
+        letList.sort(key =  lambda  x: x[1:])
+        print(letList)
+
+        for i  in range( 0, len(letList) ,1):
+             letList[i] = " ".join( letList[i])
+        print(letList)
+
+        letList = letList +  digList
+
+        return letList
+       
