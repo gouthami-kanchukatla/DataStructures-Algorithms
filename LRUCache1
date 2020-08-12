@@ -1,0 +1,52 @@
+class LRUCache:
+    hashMap  = {}
+    queue =  []
+    capacity = 0
+    removeList = []
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+       
+        
+        
+
+    def get(self, key: int) -> int:
+        
+        if key not in self.hashMap:
+            print(key)
+            return  -1
+        if(len(self.queue) >1):
+            self.queue.remove(key)
+            self.queue.append(key)
+        return self.hashMap[key]
+        
+        
+        
+        
+        
+        
+
+    def put(self, key: int, value: int) -> None:
+      
+    
+        if(len(self.queue) == self.capacity):
+            # print(len(self.queue), self.capacity)
+            lastElement  = self.queue.pop(0)
+            # print(lastElement)
+            del self.hashMap[lastElement]
+            print(self.hashMap)
+           
+
+        self.hashMap[key]  = value
+        # print(self.hashMap)
+        self.queue.append(key)
+        # print(self.hashMap)
+
+        
+        
+        
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
