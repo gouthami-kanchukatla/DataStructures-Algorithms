@@ -1,0 +1,72 @@
+class DLL:
+    def  __init__(self,key:  int, val : int):
+        self.key  = key
+        self.val = val
+        self.prev = None
+        self.next = None
+
+class LRUCache:
+    # hashMap  = {}
+    # queue =  []
+    # capacity = 0
+    # removeList = []
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.hashMap = {}
+        self.head = DLL( -1,-1)
+        self.tail = self.head
+        
+       
+    def get(self, key: int) -> int:
+        
+        if key not in self.hashMap:
+            return  -1
+        node = self.hashMap[key]
+        if(node.next):
+           #removing a nodee
+            self.removeNode(node)
+            #inserting a node            
+            self.insertNode(node)
+        
+        return node.val
+        
+    def  insertNode(self,node: DLL):
+            self.tail.next = node
+            node.prev = self.tail
+            node.next  = None
+            self.tail =  node
+            
+    def  removeNode(self, node:DLL):
+        node.prev.next  = node.next
+        node.next.prev = node.prev
+            
+        
+    def put(self, key: int, value: int) -> None:
+        
+        if(key  in self.hashMap):
+            node = self.hashMap[key]
+            node.val = value
+            if(node.next):
+                node =  self.hashMap[key]                
+                #removing a nodee
+                self.removeNode(node)                
+                #inserting a node
+                self.insertNode(node)
+        else:                
+            node = DLL(key,value)
+            self.hashMap[key] = node
+
+            #inserting a node
+            self.insertNode(node)
+            
+            if( len(self.hashMap)  > self.capacity):
+                removeNode = self.head.next
+                self.head.next  = self.head.next.next
+                self.head.next.prev = self.head
+                # del removeNode
+                del  self.hashMap[removeNode.key]
+                
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
