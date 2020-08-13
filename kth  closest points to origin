@@ -1,0 +1,13 @@
+import heapq
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        
+        kClosestList  = []
+        maxHeap =  heapq
+        for point in points:
+            distance = -1  *  (pow(point[0],2) + pow(point[1],2))
+            if len(kClosestList)  ==  K:
+                maxHeap.heappushpop(kClosestList,[distance, point])                
+            else:                
+                maxHeap.heappush(kClosestList, [distance, point])
+        return map(lambda x:x[1],kClosestList)  
