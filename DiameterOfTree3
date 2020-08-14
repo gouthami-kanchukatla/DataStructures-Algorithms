@@ -1,0 +1,25 @@
+class Solution:
+    
+    maxDiameter =  0
+    
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        
+        self.maxDepth(root)
+        return self.maxDiameter
+        
+    def maxDepth(self,root:TreeNode):
+
+
+        if not root:
+            return  0
+
+        x = self.maxDepth(root.left)
+        y=  self.maxDepth(root.right)
+
+        self.maxDiameter  = max(self.maxDiameter,x+y)
+
+
+        if(x>y):
+            return x+1
+        else:
+            return  y+1    
