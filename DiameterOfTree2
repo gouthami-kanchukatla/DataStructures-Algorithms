@@ -1,0 +1,43 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    hashMap = defaultdict(int)
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        
+        if(not root):
+            return  0
+        
+        leftSubTreeDepth  = self.maxDepth(root.left)
+        rightSubTreeDepth = self.maxDepth(root.right)
+        leftDiameter = self.diameterOfBinaryTree(root.left)
+        rightDiameter = self.diameterOfBinaryTree(root.right)
+        print(leftSubTreeDepth+rightSubTreeDepth,leftDiameter,
+                                                
+                                      rightDiameter)
+
+        return max(leftSubTreeDepth+rightSubTreeDepth, max(leftDiameter,rightDiameter))
+        
+    
+        
+        
+        
+    def maxDepth(self,root:TreeNode) -> int:
+        
+        
+        if not root:
+            return  0
+                
+        x = self.maxDepth(root.left)
+        y=  self.maxDepth(root.right)
+        
+        if(x>y):
+            self.hashMap[root] = x+1
+        else:
+            self.hashMap[root]  =  y+1
+        
+        return self.hashMap[root]
+        
