@@ -30,6 +30,8 @@ class Solution:
         
         if not root:
             return  0
+        if(self.hashMap[root] !=  0):
+            return self.hashMap[root]
                 
         x = self.maxDepth(root.left)
         y=  self.maxDepth(root.right)
