@@ -1,0 +1,36 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        
+        if( not s):
+            return ""
+        if(len(s) == 1):
+            return s
+        str_Result = ""
+        
+        
+        i  = 0
+        Matrix = [[-1 for y in range(len(s))] for x in range(len(s))]
+        while i < len(s):
+            Matrix[i][i] =1
+            str_Result = s[i]
+            i = i+1
+        i = 0
+        while i < len(s)-1:
+            if(s[i] == s[i+1]):
+                Matrix[i][i+1] = 1
+                str_Result = s[i:i+2]
+            else:
+                Matrix[i][i+1] = 0
+            i = i+1
+            
+        for k in range(2, len(s),1):
+            
+            for start in range(0, len(s)-k,1):
+                end = start+k
+                if( s[start] == s[end] and  Matrix[start+1][end-1] == 1):
+                    Matrix[start][end] =  1
+                    str_Result = s[start: end+1]
+                else:
+                    Matrix[start][end] =  0
+    
+        return str_Result
