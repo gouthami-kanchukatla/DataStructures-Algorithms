@@ -1,0 +1,24 @@
+class Solution:
+    def partitionLabels(self, S: str) -> List[int]:
+        
+        if(not S):
+            return []
+        
+        hashMap ={}
+        partitionList = []
+        for ele in  S:
+            hashMap[ele] = S.rindex(ele,0,len(S)) 
+       
+        i = 0
+        while i <  len(S):
+            end = hashMap[ S[i]]
+            j = i+1            
+            while j < end:
+                
+                lastIndex = S.rindex(S[j],0,len(S))
+                end =  max(end, lastIndex)
+                j = j+1
+            partitionList.append(end-i+1)
+            i  = end+1
+        return partitionList
+                
