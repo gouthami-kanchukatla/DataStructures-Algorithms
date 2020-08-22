@@ -1,0 +1,22 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+        
+        return self.exploreDFS(root,float('-inf'))
+        
+    def exploreDFS(self,root: TreeNode, mx: int):
+        
+        if(not root):
+            return 0
+        
+        if(root):
+            goodCount = 0
+            if(root.val >= mx):
+                mx  = root.val
+                goodCount = goodCount+1
+            return  goodCount + self.exploreDFS(root.left,mx) + self.exploreDFS(root.right,mx)
