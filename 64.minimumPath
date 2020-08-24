@@ -1,0 +1,27 @@
+class Solution:
+    # minPath = set()
+    minSum  = float('inf')
+    tempSum  =  0
+    
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        if(not grid):
+            return  0
+        self.exploreDFS(0,0,grid)
+        return self.minSum
+            
+    def exploreDFS(self, i, j, grid: List[List[int]]):
+          
+        if(  j > len(grid)-1  and  i >  len(grid[0]) -1 ):
+            # print(self.minSum)
+            return 
+        
+        if(  i > len(grid)-1  or  j >  len(grid[0]) -1 ):
+            return 
+        
+        self.tempSum = self.tempSum  +  grid[i][j]
+        if(  i == len(grid)-1  and  j  ==  len(grid[0]) -1 ):
+                self.minSum = min(self.minSum,self.tempSum)
+
+        self.exploreDFS(i,j+1,grid)
+        self.exploreDFS(i+1,j,grid)
+        self.tempSum = self.tempSum - grid[i][j]
