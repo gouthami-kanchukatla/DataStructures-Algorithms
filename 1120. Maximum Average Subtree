@@ -1,0 +1,49 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    hashMap = defaultdict(float)
+    countMap =  defaultdict(int)
+
+    resultRoot  = 0.0
+    maxAvg = float('-inf')
+    
+
+    def maximumAverageSubtree(self, root: TreeNode) -> float:
+        
+        if(not root):
+            return 0
+
+        
+        self.exploreDFS(root)
+       
+        return self.maxAvg      
+        
+    def exploreDFS(self,root:TreeNode) -> float:
+        if(not root):
+            return 0
+        if self.hashMap[root]:
+            return self.hashMap[root]
+        
+        self.hashMap[root]  = root.val+ self.exploreDFS(root.left)+self.exploreDFS(root.right)
+        countNodes =  self.countNodes(root)
+        result  = float(self.hashMap[root] / countNodes)
+        if( self.maxAvg < result):
+            self.maxAvg =  result
+                         
+        return  self.hashMap[root]
+    
+    def countNodes(self,root:TreeNode) -> int:
+        
+        if(not root):
+            return  0
+        
+        if self.countMap[root]:            
+            return self.countMap[root]
+        
+        self.countMap[root]  = 1+ self.countNodes(root.left) + self.countNodes(root.right)
+
+        return self.countMap[root]
