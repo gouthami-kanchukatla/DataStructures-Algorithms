@@ -1,0 +1,48 @@
+def getOverLappedCities( query: String): -> list
+    index = cities.index(query)
+    minDis = float(-inf)
+    minDisMap = {}
+    minDisMap[minDis]  = ""
+    
+    for i in  range(0,numOfCities,1 );
+         if(i!= index and (xList[i] != xList[index] or yList[i] != yList[index]):
+            dist = findDistance( xList[i],yList[i],xList[index],yList[index])
+            if( dist < minDis):
+                minDisMap.remove(minDis)
+                minDis = dist
+                minDisMap[minDis] = cities[i]
+                # overLapList.append(cities[i])
+            elif( dist == minDis):
+                str1 = minDisMap[minDis]
+                str2 =  cities[i]
+                if( str2  < str1);
+                    minDisMap[minDis] = str2
+   return minDisMap[minDis]
+
+def queriesList(queries: List):
+    for ele in queries:
+         result =  getOverLappedCities(ele)
+        if(result  == ""):
+            result =  None          
+         finalList.append(result)
+            
+return finalList
+
+            
+# Input:
+
+# numOfCities = 3
+# cities = ["c1", "c2", "c3"]
+# xCoordinates = [3,2,1]
+# yCoordinates = [3,2,3]
+# numOfQueries = 3
+# queries = ["c1", "c2", "c3"]
+
+# Output:
+
+# [c3, None, c1]
+            
+                
+    
+    
+    
