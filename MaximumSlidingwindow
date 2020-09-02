@@ -1,0 +1,23 @@
+import heapq
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        
+        if(not nums):
+            return []
+        tempMax  = float('-inf')
+        globalMax =  []
+        tempHeap =[]
+        i =  0
+        while i < (len(nums)-k+1):
+            
+            temp  = nums[i : i+k]
+            
+            for j in range(0,len(temp),1):
+                
+                heapq.heappush(tempHeap, -temp[j])
+                
+            globalMax.append(-( heapq.heappop(tempHeap) ) )
+            tempHeap =[]
+            # tempMax =  float('-inf')
+            i  = i+1
+        return  globalMax
