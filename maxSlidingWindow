@@ -1,0 +1,48 @@
+from collections import deque
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        
+        if(not nums):
+            return []
+        
+        if( not k):
+            return nums
+        
+        if( k == 1):
+            return nums
+            
+        globalMax =  []
+        
+        maxNum =  float('-inf')
+        maxQue = deque()
+        maxIndex  = 0
+        i =  0
+        
+        def checkDeque(i):
+            if( maxQue and maxQue[0]  ==  i-k):
+                    maxQue.popleft()
+                # else:
+                #     maxNum = float('-inf')
+            while maxQue and nums[i] > nums[maxQue[-1]]:
+                 maxQue.pop()  
+        
+        
+        for i in range(0,k,1):
+            checkDeque(i)
+            maxQue.append(i)                
+            if nums[i]  > nums[ maxIndex]:
+                maxIndex = i
+        globalMax.append( nums[maxIndex])
+
+
+        
+        for i in  range(  k,  len(nums),1):
+            checkDeque(i)
+            maxQue.append(i)
+            globalMax.append( nums[maxQue[0]])
+
+                
+        return  globalMax
+      
+        
+        
