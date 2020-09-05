@@ -1,0 +1,24 @@
+def bracket_match():
+    
+    text = “()()()(”
+
+    iCount = 0
+    if(not text):
+        return iCount
+                    
+    stack = []  #stack
+    for ele  in  text:
+        if ele == "(":
+              stack.push(ele)
+        elif  ele  == ")" and stack and stack[-1] == "(":
+              stack.pop(-1)                  
+        elif  ele == ")" and not stack:
+              iCount = iCount + 1
+    
+    if(stack):
+      for  ele  in stack:
+          iCount = iCount + 1
+         
+     print(iCount)                    
+                    
+  pass #
