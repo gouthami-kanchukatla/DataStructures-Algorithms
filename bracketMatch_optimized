@@ -1,0 +1,22 @@
+public static int BracketMatch(string text)
+    {
+      
+      int open=0,closed=0;
+      for(int i=0;i<text.Length;i++)
+      {
+        if(text[i]=='(')
+        {
+          open++;             
+        }
+        else if(text[i]==')')
+        {
+           if(open>0)
+              open--;
+                
+           else
+              closed++;
+        }
+      }
+      return open+closed;
+      
+    }
