@@ -1,0 +1,10 @@
+class Solution:
+    def countElements(self, arr: List[int]) -> int:
+        count = 0
+        if(not  arr):
+            return count
+        hashSet  = set(arr)
+        for ele in arr :
+            if ele+1 in arr:
+                count = count+1
+        return count
