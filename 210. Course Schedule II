@@ -1,0 +1,32 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        
+        inDegree = {}
+        zeroDegree = set()
+        order = []
+        
+        for i in range(0,numCourses):        
+            inDegree[i] = 0
+            
+        for ele in prerequisites:
+            inDegree[ele[0]]  = inDegree[ele[0]] +1
+        
+        for  i in inDegree:
+            if(inDegree[i] ==  0):
+                zeroDegree.add(i)
+        
+        if(not  zeroDegree):
+            return []
+        
+        while zeroDegree:
+            no_preq = zeroDegree.pop()
+            order.append(no_preq)
+            for ele in prerequisites:
+                if(ele[1] == no_preq):
+                    inDegree[ele[0]] =  inDegree[ele[0]] - 1
+                    if inDegree[ele[0]] == 0:
+                        zeroDegree.add(ele[0])
+        for  i in inDegree:
+            if(inDegree[i] !=  0):
+                return []
+        return  order
