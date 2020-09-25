@@ -1,0 +1,73 @@
+ class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        maxEle  = float('-inf')
+        minEle = float('inf')
+        
+        for x  in grid:
+            maxEle =  max(max(x),maxEle)
+            
+        for x  in grid:
+            minEle =  min(min(x),minEle)
+            
+        if( minEle == 0 and maxEle == 0):
+            return 0
+        
+        if( minEle == 1 and maxEle == 1):
+            return -1
+        
+        if( minEle == 2 and maxEle == 2):
+            return 0
+        
+        rotten = []
+        rotCount =  0
+        no_of_cells = len(grid) *  len(grid[0])
+        for row in range(len(grid)):
+            for col in range(len(grid[0])):
+                if grid[row][col] == 2:
+                    rotten.append([row,col])
+                    rotCount = rotCount+1
+                elif grid[row][col] == 0:
+                     rotCount = rotCount+1
+                    
+        count = 0
+        
+        while rotten:
+            tempList = []
+            for ele in rotten:
+                row = ele[0]
+                col = ele[1]       
+
+                if(row-1 >=  0  and grid[row-1][col] == 1):
+                    grid[row-1][col] = 2
+                    rotCount = rotCount+1
+                    tempList.append([row-1,col])
+
+                if( row+1 < len(grid)  and grid[row+1][col] == 1):
+                    grid[row+1][col] = 2
+                    rotCount = rotCount+1
+                    tempList.append([row+1,col])
+
+                if( col-1  >= 0  and grid[row][col-1] == 1):
+                    grid[row][col-1] = 2
+                    rotCount = rotCount+1
+                    tempList.append([row,col-1])
+
+                if( col+1  < len(grid[0])  and grid[row][col+1] == 1):
+                    grid[row][col+1] = 2
+                    rotCount = rotCount+1
+                    tempList.append([row,col+1])
+                    
+            rotten = tempList
+            count  = count+1
+            
+        if( rotCount != no_of_cells):
+            return -1
+            
+            
+                    
+        return count-1
+                
+            
+            
+            
+                    
