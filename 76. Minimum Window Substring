@@ -1,0 +1,39 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        if(not s or not t):
+            return ""
+        if( len(t) > len(s)):
+            return ""
+        let_map  = defaultdict(int)
+        for ele in t:
+            let_map[ele] =  let_map[ele] + 1
+        count = 0
+        left = 0
+        min_string = ""
+        min_len  = sys.maxsize
+        start = 0
+        for right in  range(len(s)):
+            if(s[right] in let_map.keys()):
+                let_map[s[right]] =   let_map[s[right]] -1
+                if let_map[s[right]] >=0 :
+                    count = count+ 1
+            while count == len(t):
+                if( right -left+1 < min_len ):
+                    min_len  = right -left+1
+                    start = left
+
+                if(s[left] in let_map.keys()):
+                    let_map[s[left]] =   let_map[s[left]] + 1
+                    if let_map[s[left]] > 0:                            
+                        count =  count-1
+                left = left+1
+        print(left,min_len)
+        if min_len >  len(s):
+            return ""
+        
+        return s[start: start+min_len]
+       
+      #https://www.youtube.com/watch?v=nMaKzLWceFg  
+            
+        
+        
