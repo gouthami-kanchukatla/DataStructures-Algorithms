@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    #in BST, the inorder  transerval always give ascending order of the tree
+    def isValidBST(self, root: TreeNode) -> bool:
+        if(not root):
+            return True
+        temp =  root
+        prev  = float('-inf')
+        stack =  []
+        while(  temp or stack):
+            if(temp):
+                stack.append(temp)
+                temp = temp.left       
+            else:
+                temp = stack.pop(-1)
+                if( temp.val <= prev):
+                    return False
+                prev = temp.val
+                temp  = temp.right
+        return  True  
