@@ -1,0 +1,23 @@
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if( not digits):
+            return ""
+        
+        result_deque = deque()
+        phone_letters = {'2': ['a', 'b', 'c'],
+                 '3': ['d', 'e', 'f'],
+                 '4': ['g', 'h', 'i'],
+                 '5': ['j', 'k', 'l'],
+                 '6': ['m', 'n', 'o'],
+                 '7': ['p', 'q', 'r', 's'],
+                 '8': ['t', 'u', 'v'],
+                 '9': ['w', 'x', 'y', 'z']}
+        result_deque.append('')
+        for  ch in digits:
+            chars = phone_letters[ch]                   
+            for  j in range(0,len(result_deque)):
+                cur_str = result_deque.popleft()
+                for  j in range(0,len(chars)):
+                    result_deque.append( cur_str+chars[j])
+            
+        return list(result_deque)
