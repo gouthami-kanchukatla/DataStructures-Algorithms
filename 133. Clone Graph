@@ -1,0 +1,25 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+class Solution:
+    def __init__(self):
+        #DFS Search
+        self.map_visited = {}  #only for tracking created  objects 
+        
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if(not  node):
+            return node
+            
+        if node.val in self.map_visited:
+            return self.map_visited[node.val]
+        copy = Node(node.val, [] )
+        self.map_visited[node.val] = copy
+        for neighbor in node.neighbors:
+            copy.neighbors.append( self.cloneGraph(neighbor) )
+        return copy
+            
