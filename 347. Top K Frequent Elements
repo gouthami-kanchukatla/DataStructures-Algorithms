@@ -1,0 +1,26 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count =  collections.Counter(nums)
+        # count.sort( key = lambda x: x[0])
+        # count.sort( key = lambda x: x[1], reverse  = True)
+        # resultList = list(map(lambda x:x[0],count) )
+        # return resultList[:k]
+    
+        heap = []
+        for ele in count.keys():
+            if(len(heap) == k):
+                if(heap[0][0] < count[ele]):
+                    heapq.heappush(heap, (count[ele],ele) )
+                    heapq.heappop(heap)
+            else:
+                heapq.heappush(heap,(count[ele],ele) )
+        result =[]
+        i = 0
+        
+        while( i<k):
+            i+=1
+            root = heapq.heappop(heap)
+            print(root)
+            result.append(root[1])
+        return result
+        
