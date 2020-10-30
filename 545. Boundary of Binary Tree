@@ -1,0 +1,47 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    path = collections.OrderedDict()
+
+    def boundaryOfBinaryTree(self, root: TreeNode) -> List[int]:
+        
+        if(not root):
+            return []
+        
+        self.path[root.val] = 0
+        left_subtree = root.left
+        right_subtree = root.right
+        
+        
+        while(left_subtree):
+            print(left_subtree.val)
+            self.path[left_subtree.val] = 0
+            left_subtree = left_subtree.left
+            
+        self.leaf_nodes(root)
+        while(right_subtree):
+            print(right_subtree.val)
+            self.path[right_subtree.val] = 0
+            right_subtree = right_subtree.right
+            
+        result  = self.path.keys()
+        
+        # print(self.path)
+        return result
+        
+            
+    def leaf_nodes(self, root: TreeNode):
+        
+        if(not root):
+            return
+        
+        self.leaf_nodes( root.left)
+        self.leaf_nodes( root.right)
+        if(not root.left and not root.right):
+            print(root.val)
+            self.path[root.val] = 0
+        
