@@ -1,0 +1,17 @@
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        if len(intervals) <= 1:
+            return len(intervals)
+        intervals.sort( key = lambda a:a[0])
+        min_rooms = []
+        
+        heapq.heappush(min_rooms, intervals[0][1])
+        
+        for ele in intervals[1:]:
+            if( ele[0] < min_rooms[0]):
+                heapq.heappush(min_rooms, ele[1])
+            else:
+                heapq.heappop(min_rooms)
+                heapq.heappush(min_rooms, ele[1])
+
+        return len(min_rooms)
