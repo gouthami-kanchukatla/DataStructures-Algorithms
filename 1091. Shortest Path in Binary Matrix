@@ -1,0 +1,48 @@
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int: #string, 
+        # https://www.youtube.com/watch?v=sA4QuOnE_Dw
+        if(not grid):
+            return 0
+       
+        iRows = len(grid)
+        iColumns = len(grid[0])
+        
+        if grid[0][0] == 1 or grid[iRows-1][iColumns-1]  == 1:
+                return  -1
+        queue = deque()
+        # visited_nodes = set()       
+        i = 0
+        j = 0
+        level = 0
+
+        #queue -> (x,y,level)
+        directions = {(0,1),(1,0),(1,1),(0,-1),(-1,0),(1,-1),(-1,1),(-1,-1)}
+        queue.append((0,0))
+        visited_nodes.add((0,0))
+
+        
+        while( queue):
+            level = level+1
+            deque_len = len(queue)
+            i =  0
+            while i < deque_len:
+                # curr_x_y  =  queue.popleft()
+                x,y  =  queue.popleft()
+                if  x == iRows-1 and y == iColumns-1:
+                        return level
+                for direction  in directions:
+                    # direction = directions[j]
+                    d_x,d_y  = direction
+                    new_x = x  + d_x
+                    new_y = y + d_y
+                    
+                    if  new_x  < 0  or new_x >= iColumns or new_y <0  or new_y >= iRows  or grid[new_x][new_y] == 1  or  (new_x,new_y) in visited_nodes:
+                        continue
+                    visited_nodes.add((new_x,new_y))
+                    queue.append( (new_x,new_y))
+                    
+                i  =  i+1
+                    
+        return -1
+        
+        
