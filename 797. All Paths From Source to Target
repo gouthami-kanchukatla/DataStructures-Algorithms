@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        
+        // https://www.youtube.com/watch?v=UlH8zUjyi5s
+        //check backtracking too
+        
+        vector<vector<int>> result;
+        queue<vector<int>> paths; 
+        int target = graph.size()-1; 
+        paths.push({0});
+        while ( paths.size())
+        {
+            auto v = paths.front(); paths.pop();
+            if ( v.back() == target)
+            { 
+                result.push_back(v);
+            }
+            else
+            {
+                auto neighbours = graph[ v.back()];
+                
+                for(int i=0;i<neighbours.size();i++){
+                    vector<int> t (v.begin(), v.end());
+                    t.push_back(neighbours[i]);
+                    paths.push(t);
+                }
+            }
+            
+                
+        }
+        return result;              
+    }
+};
