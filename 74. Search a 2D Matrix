@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        
+        // if (size(matrix) == 0 or size(matrix[0]) ==  0) {
+        //     return false;
+        // } 
+        if (!matrix.size() || ! matrix[0].size()) return false;
+        int start  =  0;
+        int rows = size(matrix);
+        int columns = size(matrix[0]);
+        int end = (rows * columns) -1;
+
+        while (start <= end)
+        {
+            int mid = start+ (end-start)/2;
+            int midElement = matrix[ mid /columns ][mid % columns];
+            if (midElement == target)
+            {
+                return true;
+            }
+            else if ( midElement < target)
+            {
+                start = mid + 1;
+            }
+            else
+            {
+                end = mid - 1;
+            }
+                
+            
+        }
+        
+        return false;
+        
+       
+        
+    }
+};
