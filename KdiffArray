@@ -1,0 +1,32 @@
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        hashSet = set()
+        hashMap  = defaultdict(int)
+        for i  in nums:
+            hashMap[i] += 1
+
+        for ele in nums:
+           
+            if k == 0: 
+                if (hashMap[ele] >1):
+                    hashSet.add( (ele, ele))
+                continue
+            target1 =  ele - k 
+            target2 = ele + k
+            if ( ( target1 in hashMap  ) ):
+                if target1 < ele: 
+                    hashSet.add( (target1, ele))
+                else:
+                     hashSet.add( (ele, target1))
+                       
+            if ( ( target2 in hashMap  ) ):
+                if target2 < ele: 
+                    hashSet.add( (target2, ele))
+                else:
+                     hashSet.add( ( ele, target2))
+                    
+                
+
+        return len(hashSet)
+        
+                
