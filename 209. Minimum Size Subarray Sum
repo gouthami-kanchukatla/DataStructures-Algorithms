@@ -1,0 +1,19 @@
+ class Solution:
+    def minSubArrayLen(self, s: int, nums: List[int]) -> int:
+        if not nums or s == 0:
+            return 0
+        
+        left = 0
+        right = 0
+        min_count = float('inf')
+        total  = 0
+        while(right < len(nums)):
+            total  = total+ nums[right]
+            while ( total >= s):
+                min_count =  min(min_count,right-left+1)
+                total = total - nums[left]
+                left += 1
+            right +=1
+            # <expression1> if <condition> else <expression2>
+
+        return  0 if min_count == float('inf') else min_count
