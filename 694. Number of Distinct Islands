@@ -1,0 +1,66 @@
+class Solution:
+    def numDistinctIslands(self, grid: List[List[int]]) -> int:
+        
+        #string, column length, return Islands
+        
+        if(not grid):
+            return 0
+        
+        iNumOfIslands = 0
+        iRows = len(grid)
+        hash_set = set()
+        
+        for i  in range(0,iRows,1) :
+            for j in range(0,len(grid[i]),1):
+                if(grid[i][j] == 1):
+                    # iNumOfIslands  += 1
+                    print("found")
+                    pattern = self.exploreDFS(grid,i,j,'')
+                    print(pattern)
+                    hash_set.add(pattern)
+        # return iNumOfIslands
+        return len(hash_set)
+                
+    def exploreDFS(self, grid: List[List[str]], i, j,key) -> str:
+                
+        if(i < 0 or i >= len(grid)):
+            return 'v'
+        
+        if( j < 0 or j >= len(grid[i])):
+            return 'v'
+        
+        if( grid[i][j] == 0):
+            return 'v'
+        
+        grid[i][j] = 0
+        
+        # newret  = ''
+        
+        # newret = newret+key
+        # newret = key
+        # newret.append(key)  #uuuu
+        
+        uret  = self.exploreDFS(grid,i-1,j,'u') #up
+        # newret.append(uret)
+        # newret = newret+uret
+
+        dret  = self.exploreDFS(grid,i+1,j,'d') #down
+        # newret.append(dret)
+        # newret = newret+dret
+
+        lret = self.exploreDFS(grid,i,j-1,'l') #left
+        # newret.append(lret)
+        # newret = newret+lret
+
+        rret = self.exploreDFS(grid,i,j+1,'r') #left
+        # newret.append(rret)
+        # newret = newret+rret
+        
+
+        
+        # return   newret + uret+dret+lret+rret
+        return   key + uret+dret+lret+rret
+        
+        
+        
+
