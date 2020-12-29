@@ -1,0 +1,87 @@
+from collections import deque
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+        if(not root):
+            return []
+        
+        d_queue = deque()
+        node = TreeNode("$",None,None)
+        d_queue.append(node)
+        d_queue.appendleft(root)
+        final_result  = []
+        while d_queue:
+            l_ele = d_queue[0].val
+            r_ele = d_queue[-1].val
+            temp_res = []
+            if l_ele == "$" and r_ele == "$":
+                break
+            while l_ele != "$":
+                temp = d_queue.popleft()
+                temp_res.append(temp.val)
+                if temp.left:
+                    d_queue.append(temp.left)
+                if temp.right:
+                    d_queue.append(temp.right)
+                l_ele = d_queue[0].val
+            while r_ele != "$":
+                temp = d_queue.pop()
+                temp_res.append(temp.val)
+                if temp.right:
+                    d_queue.appendleft(temp.right)
+                if temp.left:
+                    d_queue.appendleft(temp.left)
+                r_ele = d_queue[-1].val
+            
+            final_result.append(temp_res)            
+                
+        return final_result
+
+                
+                
+                    
+                
+                
+
+        
+
+        
+#         internalQueue = deque()
+#         externalQueue = deque()
+#         finalList = []
+#         externalQueue.append(root)
+#         LtoR  = False
+        
+#         while(externalQueue):
+#             internalQueue =  externalQueue
+#             externalQueue = deque()
+#             tempList = []
+#             while(internalQueue):
+#                 node   = internalQueue.popleft()
+#                 tempList.append(node.val)
+#                 if(LtoR):
+#                     if(node.right):
+#                         externalQueue.appendleft(node.right)
+#                     if(node.left):
+#                         externalQueue.appendleft(node.left)                    
+#                 else:
+#                     if(node.left):
+#                         externalQueue.appendleft(node.left)
+#                     if(node.right):
+#                         externalQueue.appendleft(node.right)
+#             LtoR = not LtoR    
+#             finalList.append(tempList)
+                
+#         return  finalList
+        
+            
+        
+                
+                
+            
+            
