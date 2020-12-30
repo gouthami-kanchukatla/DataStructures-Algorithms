@@ -1,0 +1,62 @@
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        if len(edges) == 0  and n >1:
+                return False
+
+        array_list = [-1]* n
+        num_comp = 0
+        # https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/discuss/827446/python-DFS
+        for ele in edges:
+           
+            p1 = self.findParent(ele[0], array_list)
+            
+            #collapsing find or path compression
+            if  array_list[ele[0]] > 0 :
+                array_list[ele[0]] = p1
+                
+            #collapsing find or path compression
+            p2 = self.findParent(ele[1], array_list)
+            if  array_list[ele[1]] > 0 :
+                array_list[ele[1]] = p2
+            
+            #checking for cycles
+            if p1 == p2:
+                return False
+        
+            if p1 != p2:
+                w1  = abs( array_list[p1])
+                w2 =  abs( array_list[p2])
+                
+                #weighted union
+                if w1 == w2 or w1 > w2:
+                    array_list[p1] =  - ( w1 + w2)
+                    array_list[p2] = p1
+                elif w1 < w2:
+                    array_list[p2] =  - ( w1 + w2)
+                    array_list[p1] = p2
+                # elif  w1 > w2:
+                #     array_list[p1] =  - ( w1 + w2)
+                #     array_list[p2] = p1
+                   
+        #checking for fully connected condition
+        for i in range(0,n):
+            if array_list[i] < 0:
+                num_comp += 1 
+        if num_comp > 1:
+            return False
+
+        return True
+
+    def findParent(self, i : int, array_list: list) -> int:
+        index = array_list[i]
+        if index < 0:
+            return i
+        
+        parent = 0
+        
+        while index >= 0:
+            parent = index
+            index = array_list[index]
+        
+        return parent
+        
