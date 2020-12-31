@@ -1,0 +1,32 @@
+class WordDistance:
+
+    def __init__(self, words: List[str]):
+        
+        self.hash_map = defaultdict(list)
+        for i in range(len(words)):
+            self.hash_map[words[i]].append(i)
+                
+
+    def shortest(self, word1: str, word2: str) -> int:
+        
+        # https://www.youtube.com/watch?v=p4OfDKMSeZc
+        
+        list1 = self.hash_map[word1]
+        list2 = self.hash_map[word2]
+        i = 0
+        j = 0
+        min_dis = float('inf')
+        
+        while  i < len(list1) and j < len(list2):
+            if list1[i] < list2[j]:
+                min_dis = min(min_dis, list2[j]-list1[i])
+                i += 1
+
+            elif list2[j] < list1[i] :
+                min_dis = min(min_dis, list1[i]-list2[j])
+                j +=1
+        return min_dis
+
+# Your WordDistance object will be instantiated and called as such:
+# obj = WordDistance(words)
+# param_1 = obj.shortest(word1,word2)
