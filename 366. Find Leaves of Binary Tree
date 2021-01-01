@@ -1,0 +1,45 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+
+    def findLeaves(self, root: TreeNode) -> List[List[int]]:
+        result = []
+        while root:
+            removed = []
+            one_root =  self.removeLeaves(root,removed)
+            result.append(removed)
+            if one_root:
+                root = None
+                
+        return result
+        
+            
+    def removeLeaves(self, root: TreeNode, removed: list) -> bool:
+        if not root:
+            return False
+            
+        if not  root.left  and not root.right:
+            removed.append(root.val)
+            return True
+    
+        # if root.left:
+        need_remove = self.removeLeaves(root.left, removed)
+        if need_remove:
+            root.left = None
+                
+        # if root.right:
+        need_remove = self.removeLeaves(root.right, removed)
+        if need_remove:
+            root.right = None
+                
+        return False
+            
+            
+        
+            
+        
+        
