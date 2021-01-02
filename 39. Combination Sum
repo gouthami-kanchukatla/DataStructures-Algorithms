@@ -1,0 +1,29 @@
+class Solution:
+    final_result = []
+    
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        seen = set()
+        add = []
+        # add.append(nums[0])
+        # seen.add(nums[0])
+        self.final_result = []
+        self.backtracking( candidates,0, add, target)
+        return  self.final_result
+    
+    def backtracking( self, candidates: list[int],index:int, add: list[int], target: int):
+        
+        # if len(add) == len(nums):
+        if target < 0:
+            return
+        if target == 0:
+            self.final_result.append(list(add))
+            return
+        
+        for i in range(index, len(candidates)):
+            # if i in seen:
+            #     continue
+            add.append(candidates[i])
+            # seen.add(i)
+            self.backtracking( candidates , i, add, target- candidates[i])
+            add.pop()
+             # seen.remove(i)
