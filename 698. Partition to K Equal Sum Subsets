@@ -1,0 +1,30 @@
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        
+        # https://www.youtube.com/watch?v=H3_er7A1pps
+
+        seen = set()
+        sum_nums = sum(nums)
+        if sum_nums % k !=0:
+            return False
+        else:
+            target = int(sum_nums/k)
+       
+        return  self.backtracking( nums,k, 0, seen,target,0)
+    
+    def backtracking( self, nums: list[int],k:int, index:int, seen:set, target: int,curr_sum:int):
+        if k == 0:
+            return  True
+        if curr_sum == target:
+            return self.backtracking( nums , k-1, 0,seen, target,0)
+        
+        for i in range(index, len(nums)):
+            num = nums[i]
+            if i not in seen and curr_sum + num <= target:
+                seen.add(i)
+                if self.backtracking( nums,k, i+1, seen, target,curr_sum+num):
+                    return True
+                seen.remove(i)
+                
+        return False
+                
