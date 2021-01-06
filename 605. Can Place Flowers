@@ -1,0 +1,18 @@
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        
+        if n == 0:
+            return True
+        
+        flwr_len = len(flowerbed)
+        for i in range(flwr_len):
+            if (flowerbed[i] == 0) and ( i == 0 or  flowerbed[i-1] != 1) and ( i == flwr_len-1 or flowerbed[i+1] != 1):
+                flowerbed[i] = 1
+                n = n-1
+                if n == 0:
+                    return True
+        
+        return  False
+    
+                
+        
