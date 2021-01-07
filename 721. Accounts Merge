@@ -1,0 +1,31 @@
+class Solution(object):
+    def accountsMerge(self, accounts):
+       
+        acc_name = {}
+        graph = defaultdict(set)
+        for acc in accounts:
+            name = acc[0]
+            
+            for mail in acc[1:]:
+                graph[acc[1]].add(mail)
+                graph[mail].add(acc[1])
+                acc_name[mail] = name
+        
+        stack = []
+        seen = set()
+        result =[]
+        for mail in graph:
+            if mail not in seen:  
+                stack.append(mail)
+                component = []
+                while stack:
+                    mail = stack.pop()
+                    # component.append(mail)
+                    for neigh in graph[mail]:
+                        if neigh not in seen:
+                            component.append(neigh)
+                            seen.add(neigh)
+                            stack.append(neigh)
+                result.append( [acc_name[mail]] + sorted(component))
+            
+        return result
