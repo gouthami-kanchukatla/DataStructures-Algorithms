@@ -1,0 +1,37 @@
+class Solution:
+    def shortestWordDistance(self, words: List[str], word1: str, word2: str) -> int:
+        
+        for i in range(0, len(words)):
+            if words[i] == word1:
+                selected = word1
+                to_find = word2
+                start = i
+                break
+                
+            elif words[i] == word2:
+                selected = word2
+                to_find = word1
+                start =i
+                break
+        
+        min_dist = float('inf')
+        
+        for i in range( start+1, len(words)):
+            if word1 != word2:
+                if words[i] == selected:
+                    start = i
+            if words[i] == to_find:
+                min_dist = min( min_dist, i - start)
+                to_find = selected
+                selected = words[i]
+                start = i
+                
+        return min_dist
+                
+                
+            
+            
+                
+                
+            
+            
