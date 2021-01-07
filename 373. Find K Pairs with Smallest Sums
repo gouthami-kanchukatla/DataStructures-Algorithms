@@ -1,0 +1,19 @@
+import heapq
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        kClosestList  = [] 
+        maxHeap =  heapq
+        
+        for x in nums1:       
+            for y in nums2:
+                pair = [x,y]
+                # distance = -1  *  (pow(point[0],2) + pow(point[1],2))
+                sum_pairs = -(x+y)
+                if len(kClosestList)  ==  k:
+                    if sum_pairs >  kClosestList[0][0]:
+                        maxHeap.heappushpop(kClosestList,[sum_pairs, pair])                
+                else:                
+                    maxHeap.heappush(kClosestList, [sum_pairs, pair])
+                    
+        return  list(map( lambda x:x[1], kClosestList))
+        # return map(lambda x:x[1],kClosestList) 
