@@ -1,0 +1,21 @@
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if not nums:
+            return len(nums)
+        dup_index = 0
+        i = 0
+        while(i < len(nums)):
+            
+            if nums[dup_index] == nums[i]:
+                i = i+1
+                
+            else:
+                nums[i], nums[dup_index+1] = nums[dup_index+1],nums[i]
+                dup_index +=1
+                i = i+1
+        length =  0
+        nums = nums[0:dup_index+1]
+        length = len(nums[0:dup_index+1])
+        print(length)
+        return length
+        
