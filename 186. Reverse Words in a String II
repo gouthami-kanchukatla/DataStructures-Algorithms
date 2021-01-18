@@ -1,0 +1,31 @@
+class Solution:
+    def reverseWords(self, arr: List[str]) -> None:
+        if not arr:
+                return arr
+        left = 0
+        right = len(arr) -1 # 5
+        self.rev(arr,left,right)
+        self.reverse_string(arr)
+
+
+    def rev(self,arr,  left, right):
+      while left < right :
+        arr[left], arr[right]  = arr[right], arr[left]
+        left += 1
+        right -= 1
+
+
+    def reverse_string(self,arr):
+        start = 0
+        end = 0
+        i = 0
+        while  i < len(arr):
+            if arr[i] == ' ':
+                if arr[i-1] != ' ':
+                    end = i-1
+                    print(start,end)
+                    self.rev(arr,start,end)
+                start = i+1
+
+            i +=1
+        self.rev(arr, start,len(arr)-1)
