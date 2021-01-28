@@ -1,0 +1,31 @@
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+        
+        if not preorder:
+            return None
+        
+        stack = []
+        root = TreeNode(preorder[0])
+        stack.append(root)
+
+        for num in preorder[1:]:
+            node = TreeNode(num)
+            if num < stack[-1].val:
+                stack[-1].left = node
+                stack.append(node)
+            else:
+                while stack and num  > stack[-1].val:
+                        
+                    last = stack[-1]
+                    stack.pop()
+                      
+                last.right = node
+                stack.append(node)
+                       
+        
+        return root
+        
+        
+        
+       # https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/discuss/527491/Python-3-Stack-based-Solution-with-Commentary
+        
