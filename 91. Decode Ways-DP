@@ -1,0 +1,50 @@
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        # arr = [0]* len(s)
+        # return self.decodeWays(0,s,arr)
+        
+        return 0 if s[0] == '0' else self.decodeWays(s)
+        
+        print("hello")
+        # return self.decodeWays(0,s)
+    
+    def decodeWays(self,s : str) -> int:
+        
+        n = len(s)
+        dp = [0]* (n + 1)
+        dp[0] =  1 #empty string
+        dp[1] =  0 if s[0] == '0'  else  1
+        
+        for i in range(2,n+1):
+            print(i)
+            first = int(s[i-1:i])
+            second = int(s[i-2:i])
+            
+            if first >= 1 and first <=9:
+                dp[i] =  dp[i] +  dp[i-1]
+                
+            if second >= 10 and second <= 26:
+                dp[i] = dp[i]  +  dp[i-2]
+        return  dp[n]
+            
+#         if index == len(s): #index+2
+#             return 1
+         
+#         if s[index] == "0":
+#             return 0
+        
+#         if index == len(s) - 1: #index+1
+#             return 1
+       
+#         if  arr[index] > 0:
+#             return arr[index]
+        
+        
+        way1 = self.decodeWays(index+1,s,arr)
+        way2 = 0
+        if int(s[index: index+2]) <= 26:
+            way2 = self.decodeWays(index+2,s,arr)
+            
+        arr[index] =  way1+way2
+        return arr[index]
+            
