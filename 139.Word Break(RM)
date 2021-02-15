@@ -1,0 +1,25 @@
+class Solution:
+    def __init__(self):
+        self.hash_map  = {}
+    
+
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        # https://www.youtube.com/watch?v=LPs6Qo5qlJM
+        #recursive+ Memoization version
+        #best example - Catsandcat dict = {cats,and,cat}
+        #sub problem example s ="aaaaab", dict = { a,aa}
+        
+       
+        if s in wordDict:
+            return True
+        if s in self.hash_map:
+            return self.hash_map[s]
+        
+        for i in  range(1,  len(s)):
+            left = s[0:i]
+            if left in wordDict and self.wordBreak(s[i:len(s)], wordDict):
+                self.hash_map[s] =  True
+                return True
+       
+        self.hash_map[s] =  False
+        return False
