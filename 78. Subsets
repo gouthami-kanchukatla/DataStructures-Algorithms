@@ -1,0 +1,18 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        add = []
+       
+        self.final_result = []
+        self.backtracking( 0, add, nums )
+        return  self.final_result
+    
+    def backtracking( self,index:int, add: list[int], nums: List[int]):
+        
+        self.final_result.append(list(add))
+        
+        for i in range(index, len(nums)):
+            add.append(nums[i])
+            self.backtracking( i+1, add, nums)
+            add.pop()
+        
+        
