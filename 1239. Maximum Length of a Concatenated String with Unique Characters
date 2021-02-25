@@ -1,0 +1,26 @@
+class Solution:
+    max_len = float('-inf')
+    def maxLength(self, arr: List[str]) -> int:
+        add = []
+
+        self.final_result = []
+        curr_str = ""
+        arr.sort()
+        self.backtracking( 0, add, curr_str,arr )
+        return  self.max_len
+    
+    def backtracking( self,index:int, add: list,curr_str: str, arr: List[int]):
+        
+        self.max_len = max(len(curr_str),self.max_len)
+        
+        for i in range(index, len(arr)):
+            if i-1 > 0 and arr[i] == arr[i-1]:
+                continue
+            if len(arr[i]) != len(set(arr[i])):
+                continue
+            if len(curr_str+arr[i]) != len(set(curr_str+arr[i])):
+                continue
+            # curr_str = curr_str + arr[i] #["a","abc"]
+            add.append(curr_str)
+            self.backtracking( i+1, add,curr_str + arr[i], arr)
+            add.pop()
