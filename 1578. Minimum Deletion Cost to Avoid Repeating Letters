@@ -24,5 +24,6 @@ class Solution:
             i +=1
             
         
+        
         return min_cost
         
