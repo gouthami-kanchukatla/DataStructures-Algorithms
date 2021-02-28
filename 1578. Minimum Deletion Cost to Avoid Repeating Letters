@@ -1,0 +1,28 @@
+class Solution:
+    def minCost(self, s: str, cost: List[int]) -> int:
+        if not s:
+            return  0
+        if len(s) == len(  set(s)):
+            return 0
+        i = 1
+        n =  len(s)
+        min_cost = 0
+        prev = 0
+        while i < n:
+            nxt  = i
+            print(prev, nxt )
+
+            if s[ nxt] != s[prev]:
+                prev = nxt
+            else:
+                if cost[prev] < cost[nxt]:
+                    min_cost  += cost[prev]
+                    prev  = nxt
+
+                else:
+                    min_cost  += cost[ nxt ]
+            i +=1
+            
+        
+        return min_cost
+        
