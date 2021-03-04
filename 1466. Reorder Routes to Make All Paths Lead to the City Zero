@@ -1,0 +1,50 @@
+class Solution:
+    #BFS, check  DFS solution  below too
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        hash_map = defaultdict(list)
+        
+        for ele in connections:
+            hash_map[ele[0]].append((ele[1],1))
+            hash_map[ele[1]].append((ele[0],0))
+                                     
+        
+        queue =  deque([0])
+        visited  = set([0])
+        count = 0
+        
+        while queue:
+            curr_node = queue.popleft()
+            for neighbour, weight in hash_map[curr_node]: 
+                if neighbour  not  in visited:
+                    visited.add(neighbour)
+                    count  += weight
+                    queue.append(neighbour)
+        return  count
+#DFS
+#     def minReorder(self, n: int, connections: List[List[int]]) -> int:
+#         def dfs(node):
+#             nonlocal edgeCount
+#             for x , direction in adjList[node]:
+#                 if x not in visited:
+#                     visited.add(x)
+#                     edgeCount += direction
+#                     dfs(x)
+#         adjList = defaultdict(list)
+#         reverseList = defaultdict(list)
+#         edgeCount = 0
+#         for i , j in connections:
+#             adjList[i].append((j , 1))
+#             adjList[j].append((i , 0 ))
+#         visited = set()
+#         visited.add(0)        
+#         dfs(0)
+#         return edgeCount
+                
+                 
+                                     
+            
+            
+            
+            
+        
+        
