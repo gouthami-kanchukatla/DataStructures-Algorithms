@@ -1,0 +1,19 @@
+class Solution:
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        hash_map = defaultdict(list)
+        count =  defaultdict(int)
+        min_subarray  = float('inf')
+        
+        for i,ele in  enumerate(nums):
+            hash_map[ele].append(i)
+            count[ele] += 1
+            
+        max_degree =  max( count.values())
+        
+        for ele in count.keys():
+            if count[ele] == max_degree:
+                left_index =  hash_map[ele][0]
+                right_index = hash_map[ele][-1]
+                array_size = right_index - left_index + 1
+                min_subarray = min(min_subarray, array_size)
+        return min_subarray
