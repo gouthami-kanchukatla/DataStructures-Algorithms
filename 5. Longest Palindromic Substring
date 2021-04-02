@@ -1,0 +1,37 @@
+def findLength(self, A: str, B: str) -> str:
+        max_value = 0
+        ans = ""
+        # if not A or not B:
+        #     return 0
+        m = len(A)
+        n = len(B)
+        dp =  [[0 for y in range(m+1)] for x in range(m+1)]
+        
+
+                
+        for  i  in range(0,m+1):
+            
+            for j in  range(0,m+1):
+                
+                if(i==0 or j==0):
+                    dp[i][j]=0
+                
+                elif A[i-1] == B[j-1]:
+                    
+                    dp[i][j]=1+dp[i-1][j-1]
+                    if dp[i][j] > max_value :
+                        k = i-dp[i][j]
+                        l = k + dp[i][j]
+                             
+                        temp = A[k:l]
+                        revtemp = temp[::-1] # slicing
+                        
+                        if revtemp == temp:
+                            max_value=dp[i][j]
+                            ans = temp
+                else:
+                    dp[i][j] =  0
+        
+      
+        return ans
+        
