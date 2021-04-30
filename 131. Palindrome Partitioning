@@ -1,0 +1,32 @@
+class Solution:
+    def __init__(self):
+        self.result  = []
+    def partition(self, s: str) -> List[List[str]]:
+        path = []
+        self.backtracking(0,s,path)
+        
+        return self.result
+        
+        
+        
+        
+    def backtracking(self,index:int, s:str,path:list):
+        
+        if index == len(s):
+            self.result.append(list(path))
+            return
+            
+        
+        for i in range(index,len(s)):
+            if self.isPalindrome(s,index,i):
+                path.append(s[index:i+1])
+                self.backtracking(i+1,s,path)
+                path.pop()
+                
+                
+    def isPalindrome(self,s,start_ind, end_ind):
+        while start_ind <= end_ind:
+            if s[start_ind] != s[end_ind]: return False
+            start_ind += 1
+            end_ind -=1
+        return True131. Palindrome Partitioning
