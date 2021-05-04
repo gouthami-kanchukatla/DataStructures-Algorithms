@@ -1,0 +1,61 @@
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if( not digits):
+            return ""
+        
+        result_deque = deque()
+        phone_letters = {'2': ['a', 'b', 'c'],
+                 '3': ['d', 'e', 'f'],
+                 '4': ['g', 'h', 'i'],
+                 '5': ['j', 'k', 'l'],
+                 '6': ['m', 'n', 'o'],
+                 '7': ['p', 'q', 'r', 's'],
+                 '8': ['t', 'u', 'v'],
+                 '9': ['w', 'x', 'y', 'z']}
+        ans = []
+        # result_deque.append('')
+        # for  ch in digits:
+        #     chars = phone_letters[ch]                   
+        #     for  j in range(0,len(result_deque)):
+        #         cur_str = result_deque.popleft()
+        #         for  j in range(0,len(chars)):
+        #             result_deque.append( cur_str+chars[j])
+        # return list(result_deque)
+        
+       
+        
+        
+        
+        
+        
+        def backtracking(index, s):
+            nonlocal ans
+        
+            # if len(add) == len(nums):
+            # if target < 0:
+            #     return
+            # if target == 0:
+            #     self.final_result.append(list(add))
+            #     return
+
+            if  len(s) ==  len(digits):
+                ans.append("".join(s))
+                return
+
+
+            chars = phone_letters[digits[index]]
+            for i in range(0, len(chars)):
+                # if i in seen:
+                #     continue
+                # if i > index and candidates[i] == candidates[i-1]:
+                #     continue
+                s.append(chars[i])
+                # add.append(candidates[i])
+                # seen.add(i)
+                backtracking( index+1, s)
+                s.pop()
+                 # seen.remove(i)
+                    
+        backtracking(0, [])      
+        return ans
+                    
