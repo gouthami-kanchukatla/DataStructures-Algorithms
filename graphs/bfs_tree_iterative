@@ -1,0 +1,26 @@
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if(not root):
+            return []
+        
+        internalQueue = []
+        externalQueue = []
+        finalList = []
+        externalQueue.append(root)
+        
+        while(externalQueue):
+            # internalQueue =  externalQueue
+            tempList = []
+            i  =  0
+            n = len(externalQueue)
+            while(i < n):
+                node   = externalQueue.pop(0)
+                tempList.append(node.val)
+                if(node.left):
+                    externalQueue.append(node.left)
+                if(node.right):
+                    externalQueue.append(node.right)
+                i  = i +1
+            finalList.append(tempList)
+                
+        return  finalList
