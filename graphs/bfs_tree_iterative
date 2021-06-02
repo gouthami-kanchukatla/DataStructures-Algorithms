@@ -8,6 +8,7 @@ class Solution:
         finalList = []
         externalQueue.append(root)
         
+        
         while(externalQueue):
             # internalQueue =  externalQueue
             tempList = []
