@@ -1,0 +1,22 @@
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+
+        
+        if not head or not head.next:
+            return None
+        fp = head
+        sp = head
+        while fp and fp.next:
+           
+            fp = fp.next.next
+            sp = sp.next
+            
+            if fp == sp:
+                sp = head  
+                while fp!= sp:
+                    fp = fp.next
+                    sp = sp.next
+                return sp
+                
+        return None
+    
