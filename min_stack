@@ -1,0 +1,46 @@
+class MinStack:
+
+    def __init__(self):
+        self.myList = []
+        self.minCache =  []
+        self.min =  float('inf') 
+        """
+        initialize your data structure here.
+        """        
+
+    def push(self, x: int) -> None:
+        
+        
+        self.myList.append(x)
+        if(   x <=  self.min):
+            self.min  = x
+            self.minCache.append(x)
+        
+
+    def pop(self) -> None:
+     
+        if( len(self.myList) is  not 0 ):        
+            if(self.top() is self.minCache[-1]):
+                self.minCache.pop()
+                if ( len(self.minCache) is not 0):
+                    self.min = self.minCache[-1]
+                else:
+                    self.min = float('inf') 
+
+            self.myList.pop()
+                    
+
+    def top(self) -> int:
+    
+      if( len(self.myList) is not 0):
+            return self.myList[-1]
+      else:
+           return  None
+        
+
+    def getMin(self) -> int:
+        
+       if ( len(self.minCache) is not 0):
+            return self.minCache[-1]
+       else:
+           return  None
