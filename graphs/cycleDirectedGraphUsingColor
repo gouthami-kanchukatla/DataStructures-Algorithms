@@ -1,0 +1,37 @@
+adj_list = {
+    "A" : ["C", "B"],
+    "B" : ["D"],
+    "C" : [],
+    "D" : ["A", "E"],
+    "E" : []
+}
+//https://www.youtube.com/watch?v=yaJ6FgyoXCw
+color = {}
+parent = {}
+
+for u in adj_list.keys():
+    color[u] = 'W'
+    parent[u] = None
+              
+def dfs(u, color):
+    color[u] = 'G'
+    print (u)
+    for v in adj_list[u]:
+        if color[v]=='W':
+            cycle = dfs(v, color)
+            if cycle:
+                return True
+        elif color[v]=='G': # cycle is present
+            print (u, v)
+            return True
+    color[u] = 'B'
+    return False
+
+is_cyclic = False
+for u in adj_list.keys():
+    if color[u] == 'W':
+        is_cyclic = dfs(u, color)
+        if is_cyclic:
+            break
+print ("Is cyclic " ,is_cyclic)
+>> True
