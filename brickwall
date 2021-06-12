@@ -1,0 +1,15 @@
+from collections import defaultdict
+class Solution:
+    def leastBricks(self, wall: List[List[int]]) -> int:
+        
+        gaps  = defaultdict(int)
+        for row  in  wall:
+            count = 0
+            for brick in range(0, len(row)-1):
+                count  +=  row[brick]
+                gaps[count] +=1
+                
+        if  not  gaps:
+            return  len(wall)
+        return  len(wall) - max(gaps.values())
+                
