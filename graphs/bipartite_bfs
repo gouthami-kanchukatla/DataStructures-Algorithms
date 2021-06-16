@@ -1,0 +1,33 @@
+from collections import defaultdict
+from collections import deque
+class Solution:
+    color = []
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        
+        
+        
+        n = len(graph)
+        self.color = [-1]* n
+        for i in range(n):
+            if self.color[i] == -1:
+                if not self.checkIfBipartite( i, graph):
+                    return False
+        return True
+                
+        
+        
+    def checkIfBipartite(self, src, graph) -> bool:
+        queue = deque()
+        queue.append(src)
+        self.color[src] = 1
+        
+        while queue:
+            par = queue.popleft()
+            for ch in graph[par]:
+                if self.color[ch] == -1:
+                    self.color[ch] = 1 - self.color[par]
+                    queue.append(ch)
+                    
+                elif self.color[ch] ==  self.color[par]:
+                    return False
+        return True
