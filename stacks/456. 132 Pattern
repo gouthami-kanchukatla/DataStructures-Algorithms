@@ -1,0 +1,12 @@
+class Solution:
+    def find132pattern(self, nums: List[int]) -> bool:
+        min_i = inf
+        //for j in range(0,len(nums) - 1):
+            min_i = min(min_i, nums[j456. 132 Pattern]//)both works
+        for j in range(1,len(nums) - 1):
+            min_i = min(min_i, nums[j-1])
+            for k in range(j + 1, len(nums)):
+                if min_i < nums[k] < nums[j]:
+                    return True
+        return False
+        
