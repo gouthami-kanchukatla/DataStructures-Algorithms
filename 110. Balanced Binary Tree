@@ -1,0 +1,31 @@
+class Solution:
+    # hashMap = defaultdict(int)
+    maxDiameter =  0
+    temp = True
+    
+    def isBalanced(self, root: TreeNode) -> bool:
+        
+        if not root:
+            return True
+        
+        val = self.maxDepth(root) 
+
+        return self.temp
+        
+    def maxDepth(self,root:TreeNode) -> int:
+        
+
+
+        if not root:
+            return  0
+
+        x = self.maxDepth(root.left)
+        y =  self.maxDepth(root.right)
+        val = abs(x-y)
+        
+        if val > 1:
+            self.temp = False
+        if x > y:
+            return x+1
+        else:
+            return y+1
