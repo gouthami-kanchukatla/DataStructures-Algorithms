@@ -1,0 +1,31 @@
+class BSTIterator:
+    stack = []
+    def __init__(self, root: TreeNode):
+        
+        
+        if root:
+        
+            self.getLeftMostElements(root)
+
+        
+
+    def next(self) -> int:
+        
+        node = self.stack.pop(-1)
+        if node.right:
+             self.getLeftMostElements(node.right)
+        return node.val
+        
+
+    def hasNext(self) -> bool:
+        if self.stack:
+            return True
+        return False
+        
+        
+    def getLeftMostElements(self,root: TreeNode ):
+       
+        while root:
+            self.stack.append(root)
+            root = root.left
+        
