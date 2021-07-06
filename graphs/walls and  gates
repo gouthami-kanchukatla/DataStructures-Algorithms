@@ -1,0 +1,26 @@
+from collections import deque
+class Solution:
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
+        if not rooms: return
+        q = deque()
+        m, n = len(rooms), len(rooms[0])
+        dis = 0
+        for i in range(m):
+            for j in range(n):
+                if not rooms[i][j]:
+                    q.append( (i,j,0) )
+        
+                   
+        while q:
+            i = 0
+            while i < len(q):
+                i, j, dis = q.popleft()
+                for di, dj in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+                    ii, jj = i+di, j+dj
+                    if 0 <= ii < m and 0 <= jj < n and rooms[ii][jj] == 2147483647:
+                        rooms[ii][jj] = dis+1 
+                        q.append((ii, jj, dis+1))
+                i +=1
+                
+             
+            
