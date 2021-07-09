@@ -1,0 +1,60 @@
+class Solution:
+    def solve(self, grid: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        
+        #string, column length, return Islands
+        
+        if(not grid):
+            return 0
+        
+ 
+        iRows = len(grid)
+        iCols = len(grid[0])
+        
+
+        for j in range(0,iCols,1):
+            if(grid[0][j] == 'O'):
+                self.exploreDFS(grid,0,j)
+
+            if(grid[iRows -1][j] == 'O'):
+                 self.exploreDFS(grid,iRows -1,j)
+                        
+        for i  in range(0,iRows,1) :
+                                
+            if(grid[i][0] == 'O'):
+                 self.exploreDFS(grid,i,0)
+
+            if(grid[i][iCols-1] == 'O'):
+                 self.exploreDFS(grid,i,iCols-1)
+                        
+                                         
+        for i  in range(0,iRows,1) :
+            for j in range(0,iCols,1):
+                     
+                if(grid[i][j] == 'O'):
+                        grid[i][j] = 'X'
+                elif(grid[i][j] == '#'):
+                        grid[i][j] = 'O'
+                
+
+                
+    def exploreDFS(self, grid: List[List[str]], i, j) -> None:
+                
+        if(i < 0 or i >= len(grid)):
+            return
+        
+        if( j < 0 or j >= len(grid[i])):
+            return
+        
+        if( grid[i][j] != 'O'):
+            return
+        
+        grid[i][j] = '#'
+ 
+        
+        self.exploreDFS(grid,i-1,j) #up
+        self.exploreDFS(grid,i+1,j) #down
+        self.exploreDFS(grid,i,j-1) #left
+        self.exploreDFS(grid,i,j+1) #right
