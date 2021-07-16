@@ -1,0 +1,41 @@
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+    [[1,0,1],
+    [0,0,1],
+    [1,1,1]]
+    [[0,0,3,0],
+     [0,0,0,0],
+     [0,0,0,0],
+    [ 0,0,0,0]]
+        """
+        cols = len(matrix[0])
+        rows = len(matrix)
+        set_row_zero = False
+        set_col_zero = False
+        for i in range(rows):
+            for j in range(cols):
+                if i == 0 and matrix[i][j] == 0:
+                    set_row_zero = True
+                if j == 0 and matrix[i][j] == 0:
+                    set_col_zero = True
+        
+        for i in range(rows):
+            for j in range(cols):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+        
+        for i in range(rows-1,0,-1):
+            for j in range(cols-1,0,-1):
+
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                     matrix[i][j] = 0
+        if set_row_zero:
+            for j in range(cols):
+                matrix[0][j] = 0
+                
+        if set_col_zero:
+            for i in range(rows):
+                matrix[i][0] = 0
