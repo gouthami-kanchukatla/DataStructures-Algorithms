@@ -1,0 +1,22 @@
+from string import ascii_lowercase
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[int]) -> str:
+        
+        result = []
+        total = sum(shifts)
+        
+        def shift_char(index,char):
+            nonlocal total
+            position = ord(char) - 97
+            position+=total
+            position %= 26
+            char = ascii_lowercase[position]
+            total -= shifts[index]
+            return char
+        
+
+        for index,char in enumerate(s):
+            ans = shift_char(index,char)
+            result.append(ans)
+        
+        return "".join(result)
