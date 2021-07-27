@@ -1,0 +1,33 @@
+class Solution:
+    def threeSumSmaller(self, nums: List[int], target: int) -> int:
+        result_set = set()
+        nums.sort()
+        count = 0
+        for i in range(len(nums)):
+            #[-1,-1,0,1,2] avoid duplicate target
+            if nums[i] > 0 :
+                break
+            if(i-1 >  0 and  nums[i-1] == nums[i]):
+                continue
+            print(nums[i],nums[i-1])
+            left =  i+1
+            right = len(nums) -1
+            while( left <  right ):
+                total = nums[i]+nums[left]+nums[right]
+                if(total < target ):
+                    count +=1
+                    #using set and list doesnot matter, the main goal here is to avoid  further computation and verification
+    
+                    #[-1,0,0,1,1] avoid duplicate pairs with target
+                    
+                    # while(left  < right and nums[left] == nums[left+1]):
+                    #     left = left+1
+                    # while(left  < right and nums[right] == nums[right-1]):
+                    #     right = right -1              
+                        
+                    # left = left + 1
+                    right = right -1
+                elif( total  >=  target):
+                    right = right -1
+            
+        return count
