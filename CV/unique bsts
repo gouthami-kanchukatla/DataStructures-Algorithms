@@ -1,0 +1,37 @@
+ class Solution:
+    def numTrees(self, n: int) -> int:
+        
+
+        #https://www.youtube.com/watch?v=9f8iSxPKjM4
+        #https://www.youtube.com/watch?v=H5dQGLqT2do
+    
+        #tabulation methond:
+        u_bst = [0] * (n+1)
+        
+        u_bst[0] = 1
+        u_bst[1] = 1
+        for nodes in range(2, n+1):
+            for j in range(1, nodes+1): #for nodes = 2, j = [1,2] #1 is root annd 2 is root
+                u_bst[nodes] = u_bst[nodes] + ( u_bst[j-1] * u_bst[nodes - j])
+        return u_bst[n]
+    
+    
+    
+        #recursive + memoization
+        hash_map = {}
+        
+        def helper( start, end):
+            
+            if start >= end:
+                return 1
+            if (start,end) in hash_map:
+                return  hash_map[(start,end)]
+
+            total = 0
+            for i in range(start,end+1): #includes end
+                total = total + ( helper(start, i-1) * helper(i+1, end))
+                
+            hash_map[(start,end)] = total
+            return total
+        
+        return helper(1,n)
