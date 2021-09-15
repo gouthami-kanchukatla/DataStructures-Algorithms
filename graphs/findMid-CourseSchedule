@@ -1,0 +1,44 @@
+from collections import defaultdict
+def findMid(input):
+    
+    inDegree = defaultdict(int)
+    graph = defaultdict(str)
+    
+    for ele in input:
+        inDegree[ele[1]] = 0
+        inDegree[ele[0]] = 0
+    print()
+    for ele in input:
+        graph[ele[0]] = ele[1]
+        inDegree[ele[1]] = inDegree[ele[1]] + 1
+    
+    start_node = ""
+    result = []
+    print( inDegree)
+    for ele in inDegree.keys():
+        if inDegree[ele] == 0:
+            start_node = ele
+            result.append(start_node)
+            break
+    
+    while graph[start_node] :
+        inDegree[ graph[start_node]] -=1
+        start_node = graph[start_node]
+        result.append(start_node)
+    print(result)
+    n = len(result)
+    if n % 2 == 0:
+        return result[ int(n/2) - 1]
+    else:
+        return result[ int(n/2)]
+
+prereqs_courses1 = [
+  ["Foundations of Computer Science", "Operating Systems"],
+      ["Data Structures", "Algorithms"],
+      ["Computer Networks", "Computer Architecture"],
+      ["Algorithms", "Foundations of Computer Science"],
+      ["Computer Architecture", "Data Structures"],
+      ["Software Design", "Computer Networks"],
+ ] 
+
+print( "answer =", findMid(prereqs_courses1) )
