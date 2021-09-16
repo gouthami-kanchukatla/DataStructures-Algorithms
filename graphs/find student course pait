@@ -1,0 +1,38 @@
+from collections import defaultdict
+
+def find_student_course_pair(student_course_pairs):
+
+    student_course = defaultdict(set)
+    result = {}
+
+    for student_id, course in student_course_pairs:
+        student_course[student_id].add(course)
+
+    student_ids = student_course.keys()
+
+    for id, a in enumerate(student_ids):
+        course_a = student_course.get(a)
+        for b in student_ids[id + 1 :]:
+            common = course_a.intersection(student_course.get(b))
+            key = "{},{}".format(a, b)
+            result[key] = list(common)
+
+    return result
+
+
+# test
+student_course_pairs_1 = [
+    ["58", "Linear Algebra"],
+    ["94", "Art History"],
+    ["94", "Operating Systems"],
+    ["17", "Software Design"],
+    ["58", "Mechanics"],
+    ["58", "Economics"],
+    ["17", "Linear Algebra"],
+    ["17", "Political Science"],
+    ["94", "Economics"],
+    ["25", "Economics"],
+    ["58", "Software Design"],
+]
+
+result = find_student_course_pair(student_course_pairs_1)
