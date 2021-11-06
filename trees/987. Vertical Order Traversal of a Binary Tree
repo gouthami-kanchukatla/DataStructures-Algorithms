@@ -1,0 +1,50 @@
+       class Solution:
+    def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        
+        # columns = defaultdict(lambda: defaultdict(list))
+        columns = defaultdict(list)
+        
+        
+        min_x = float('inf')
+        min_y = float('inf')
+        max_x = float('-inf')
+        max_y = float('-inf')
+        q = deque([(root, 0, 0)])
+        while q:
+            node, x, y = q.popleft()
+            min_x = min( min_x , x)
+            min_y = min( min_y , y)
+            max_x = max( max_x , x)
+            max_y = max( max_y , y)
+
+
+            key = str(x) + str(y)
+            # columns[x][y].append(node.val)
+            columns[key].append(node.val)
+
+            
+            if node.left:
+                q.append((node.left, x - 1, y + 1))
+            if node.right:
+                q.append((node.right, x + 1, y + 1))
+            
+#         traversal = []
+#         for x in range(min(columns), max(columns) + 1):
+#             col = []
+#             for y in columns[x]:
+#                 col += sorted(columns[x][y])
+                
+#             traversal.append(col)
+            
+            traversal = []
+            for x in range(min_x, max_x + 1):
+                col = []
+                for y in range( min_y , max_y+1):
+                    key = str(x) + str(y)
+                    if key in columns:
+                        col += sorted(columns[key])
+                
+                traversal.append(col)
+        return traversal
