@@ -1,0 +1,132 @@
+from collections import deque
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        
+        useful_nums = deque()
+        n = len(nums)
+        i = 0
+        j = 0
+        result = []
+        
+        if k == 1:
+            return nums
+    
+
+        while j < n:
+            
+            while len(useful_nums) != 0 and useful_nums[-1] < nums[j]:
+                useful_nums.pop() 
+                
+            useful_nums.append(nums[j])
+            
+#             if j-i+1 < k:
+#                 j+=1
+                    
+            if  j-i+1 == k:
+                
+                result.append(useful_nums[0])
+                if useful_nums[0] == nums[i]:
+                    useful_nums.popleft()
+            
+                i+=1
+                #j+=1
+            j+=1
+                               
+        return result
+            
+            
+            
+                    
+                
+                    
+            
+            
+            
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    print(k, ":", logjson[0][k])
+                print("")
+    return
+
+
+def dump_contents_json(name):
+    def _dump_contents_json_file(fname):
+        li = LogIndexer()
+        with open(fname, "r") as fh:
+            alen = 1
+            while alen > 0:
+                print("alen=", alen)
+                try:
+                    (alog, alen) = getALogFromFile(fh, fname)
+                    if alen > 0:
+                        logjson = convertLogsToJSON([alog])
+                        print(json.dumps(logjson, indent=2) + ",")
+                except Exception as e:
+                    print('{ "Error": "Exception in parsing file %s: %s" },' % (fname, str(e).replace('"', "'")))
+                    alen = 0
+
+    def _dump_contents_json_directory(dname):
+        for root, _, files in os.walk(dname):
+            for item in files:
+                if item.startswith('log_'):
+                    _dump_contents_json_file(os.path.join(root, item))
+
+    print("[")
+    if os.path.isfile(name):
+        _dump_contents_json_file(name)
+    else:
+        _dump_contents_json_directory(name)
+    print("{}")
+    print("]")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Give file name as argument")
+        exit(-1)
+    _FILENAME = sys.argv[1]
+    if len(sys.argv) == 2:
+        dump_contents_dict(_FILENAME)
+    else:
+        method_to_call = globals().get('dump_contents_' + sys.argv[2], None)
+        if method_to_call:
+            method_to_call(_FILENAME)
+        else:
+-- INSERT --                                                                                                                                                              40,29         96%
