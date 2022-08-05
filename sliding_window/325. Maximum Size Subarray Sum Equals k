@@ -1,0 +1,65 @@
+class Solution:
+    def maxSubArrayLen(self, nums: List[int], k: int) -> int:
+        
+        '''
+        
+        sum_list = [1,0,5,3,6]
+        k = 3 n = 1 - 3 = -2 = 0-3 = -3
+        
+        0 - -1, 1 - 0, 5 - 2, 3-3, 6-4
+        
+        [0]
+        = 0
+        
+        [0]
+        
+        sl = [0]
+        
+        
+ 0 = 0
+ 
+        '''
+        
+        def getPrefixSum(nums: List[int]) -> List[int]:
+
+            result = []
+            total = 0
+            for ele in nums:
+                total = total+ele
+                result.append(total)
+
+            return result
+        
+        sum_list = getPrefixSum(nums)
+        hash_map = {}
+        # hash_map[0] = -1
+        max_size = 0
+        
+        for curr_pos,total in enumerate(sum_list):
+
+            if total in hash_map:
+                prev_pos = hash_map[total]
+                hash_map[total] = min(prev_pos, curr_pos)
+            else:
+                hash_map[total] = curr_pos
+            
+            part1 = total-k
+            if  part1 == 0 or part1 in hash_map:
+                
+                if part1 == 0:
+                    end = -1
+                else:
+                    end =  hash_map[part1]
+
+                win_size = curr_pos - end
+                max_size = max( max_size, win_size)
+                
+        return max_size
+
+        
+        
+    
+
+        
+        
+        
